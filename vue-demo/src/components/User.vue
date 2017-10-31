@@ -2,7 +2,7 @@
     <div>
         <h3>我是user</h3>
         <div class="user-list" style="font-size:20px;"> 
-            <router-link :to={path:"'/User/'+item.type+'/'+item.id",query:{info:'follow'}} key="index" v-for="(item,index) in userList"> {{item.userName}} </router-link>
+            <router-link :to="{path:'/User/'+item.type+'/'+item.id,query:{info:'follow'}}" key="index" v-for="(item,index) in userList"> {{item.userName}} </router-link>
         </div>
         <div class="user-info" v-if="userInfo.userName" style="font-size:20px;">
             <p>姓名:{{userInfo.userName}}</p>

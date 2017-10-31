@@ -16,22 +16,66 @@
         </li>
       </ul>
     </div>
-    <router-view name="slider"></router-view>
-    <router-view class="center"></router-view>
+    <transition mode="out-in">
+      <router-view class="center"></router-view>
+    </transition>
+    <input type="button" value="后退" @click='backHandle'>
+    <input type="button" value="前进" @click='forwardHandle'>
+    
   </div>
 </template>
 
 <script>
 export default {
   name: 'app',
+  watch:{
+    $route(to,from){
+      console.log(to.meta.index);
+      console.log(from.meta.index);
+      if(to.meta.index < from.meta.index){
+        this.name = 'right';
+      }else{
+        this.name = 'left';
+      }
+    }
+  },
   data(){
     return {
-      index: '/Home'
+      index: '/Home',
+      names: left
+    }
+  },
+  methods:{
+    backHandle(){
+      this.$router.back();
+    },
+    forwardHandle(){
+      this.$router.forward();
     }
   }
 }
 </script>
 
 <style lang="scss">
-
+  .v-enter{
+    opacity:0;
+  }
+  .v-enter-to{
+    opacity:1;
+  }
+  .v-enter-active{
+    transition:1s;
+  }
+  .v-leave{
+    opacity: 1;
+  }
+  .v-leave-to{
+    opacity: 0;
+  }
+  .v-leave-active{
+    transition: 1s;
+  }
+  .left-entr{
+    transform:translateX(100%);
+  }
 </style>

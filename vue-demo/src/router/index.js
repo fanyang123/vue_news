@@ -38,11 +38,17 @@ let router = new VueRouter({
     routes:[
         {
             path: '/',
-            component: Home
+            component: Home,
+            meta:{
+                index:0
+            }
         },
         {
             path: '/User/:type?/:userId?',//user/1
-            component: User
+            component: User,
+            meta:{
+                title:User
+            }
         },
         {
             path: '/Home',
@@ -57,6 +63,10 @@ let router = new VueRouter({
                 {
                     path: '/',//默认的字路由
                     name:'About',
+                    meta: {
+                        index: 2,
+                        title:About
+                    },
                     component: study
                 },
                 {
@@ -74,6 +84,14 @@ let router = new VueRouter({
         {
             path: '/Document',
             name:'document',
+            beforeEnter(to,from,next){
+                next();
+            },
+            meta: {
+                index: 3,
+                title: Document,
+                login: true,
+            },
             components: {
                 default:Document,
                 slider: slider
@@ -101,4 +119,20 @@ let router = new VueRouter({
     ]
 })
 
+// router.beforeEach((to,from,next)=>{
+//     console.log('beforeEach');
+//     if(to.meta.login){
+//         next('/login')
+//     }else{
+//         next();
+//     }
+// })
+
+// router.afterEach((to,from)=>{
+//     if(to.meta.title){
+//         window.document.title = to.meta.title;
+//     }else{
+//         window.document.title = "miaowei";
+//     }
+// })
 export default router;//为模块指定默认输出

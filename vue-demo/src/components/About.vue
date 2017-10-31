@@ -28,7 +28,26 @@
 </template>
 
 <script>
-
+    export default{
+        data(){
+            return {
+                test:'gaibian'
+            }
+        },
+        beforeRouteEnter(to,from,next){
+            console.log('beforeRouteEnter');
+            next((vm)=>{
+                vm.test = '改变后';
+            });
+        },
+        beforeRouteUpdate (to,from,next) {
+            next();
+        },
+        beforeRouteLeave(to, from, next){
+            next();
+            
+        }
+    }
 </script>
 
 <style lang="scss">
